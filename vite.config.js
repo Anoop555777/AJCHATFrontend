@@ -16,7 +16,7 @@ export default defineConfig({
     proxy: {
       // When frontend requests /api -> send it to Node.js backend
       "/api": {
-        target: "http://localhost:8000", // your Node.js backend
+        target: "https://ajchat-pmbk.onrender.com", // your Node.js backend
         changeOrigin: true,
         secure: false,
       },
