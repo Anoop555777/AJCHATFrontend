@@ -39,7 +39,6 @@ const App = () => {
             <Route path="/channel/:channelId" element={<ChannelPage />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/verification/:verify_token" element={<VerifyUser />} />
           <Route path="/resend-verification" element={<ResendVerification />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route
@@ -48,6 +47,7 @@ const App = () => {
           />
           <Route path="/profile" element={<UserSetting />} />
           <Route path="*" element={<Navigate replace to="/login" />} />
+          <Route path="/verification/:verify_token" element={<VerifyUser />} />
         </Routes>
       </BrowserRouter>
       <Toaster
