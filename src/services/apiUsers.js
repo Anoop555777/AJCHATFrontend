@@ -1,19 +1,23 @@
 import axios from "axios";
 
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+});
+
 export async function getAllMembers() {
-  const { data } = await axios.get("/api/v1/users/getAllChannelMembers");
+  const { data } = await API.get("/api/v1/users/getAllChannelMembers");
 
   return data?.members;
 }
 
 export async function getUsersOfChannel(channelId) {
-  const { data } = await axios.get(`/api/v1/channels/${channelId}/members`);
+  const { data } = await API.get(`/api/v1/channels/${channelId}/members`);
 
   return data?.members;
 }
 
 export async function addUserToChannel(channelId, members) {
-  const { data } = await axios.post(
+  const { data } = await API.post(
     `/api/v1/channels/${channelId}/members`,
     {
       members,
@@ -27,7 +31,7 @@ export async function addUserToChannel(channelId, members) {
 }
 
 export async function removeUserFromChannel(channelId, userId) {
-  await axios.delete(`/api/v1/channels/${channelId}/members/${userId}`, {
+  await API.delete(`/api/v1/channels/${channelId}/members/${userId}`, {
     withCredentials: true,
   });
 
@@ -39,7 +43,7 @@ export async function updatePassword({
   password,
   confirmPassword,
 }) {
-  const { data } = await axios.patch(
+  const { data } = await API.patch(
     `/api/v1/auth/updatePassword`,
     {
       currentPassword,
@@ -54,7 +58,7 @@ export async function updatePassword({
 }
 
 export async function updateProfile(formData) {
-  const response = await axios.patch("/api/v1/users/updateMe", formData, {
+  const response = await API.patch("/api/v1/users/updateMe", formData, {
     withCredentials: true,
     headers: {
       "Content-Type": "multipart/form-data",
