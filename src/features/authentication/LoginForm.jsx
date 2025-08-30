@@ -166,7 +166,9 @@ export default function AuthCard() {
                   align="start"
                   justify="space-between"
                 >
-                  <Checkbox>Remember me</Checkbox>
+                  <Link href="/resend-verification" color="blue.400">
+                    resent verification
+                  </Link>
                   <Link href="/forget-password" color="blue.400">
                     Forgot password?
                   </Link>
