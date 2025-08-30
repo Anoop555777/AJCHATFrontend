@@ -8,41 +8,23 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
+import useSentVerification from "./useSentVerification";
 
 export default function ResendVerificationForm() {
+  const { sentVerification, isPending } = useSentVerification();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const navigate = useNavigate();
-
   // React Query mutation to call backend
-  const mutation = useMutation({
-    mutationFn: async (email) => {
-      const { data } = await axios.post("/api/v1/auth/resendVerification", {
-        email,
-      });
-
-      return data;
-    },
-    onSuccess: (data) => {
-      toast.success(data.message);
-      navigate("/login", { replace: true });
-    },
-    onError: (error) => {
-      toast.error(error.response?.data?.message || "Something went wrong");
-    },
-  });
 
   const forgetPasswordHandler = ({ email }) => {
-    mutation.mutate(email);
+    sentVerification(email, { onSuccess: () => reset() });
   };
 
   return (
@@ -85,7 +67,7 @@ export default function ResendVerificationForm() {
           <Button
             colorScheme="blue"
             width="full"
-            isLoading={mutation.isPending}
+            isLoading={isPending}
             type="submit"
           >
             Resend Code

@@ -68,3 +68,11 @@ export async function updateProfile(formData) {
 
   return response?.data?.user;
 }
+
+export async function resentVerification(email) {
+  const { data } = await API.post("/api/v1/auth/resendVerification", {
+    email,
+  });
+
+  return data;
+}
