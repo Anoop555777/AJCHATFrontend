@@ -13,6 +13,7 @@ const useSentVerification = () => {
     },
     onError: (error) => {
       toast.error(error?.response?.data?.message || "Something went wrong");
+      navigate("/login", { replace: true });
     },
   });
 
