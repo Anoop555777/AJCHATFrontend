@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  withCredentials: true,
 });
 
 export async function isLoggedIn() {
@@ -12,15 +13,12 @@ export async function isLoggedIn() {
 }
 
 export async function signup(data) {
-  console.log(data);
   const response = await API({
     method: "POST",
     url: "/api/v1/auth/signup",
     data,
     withCredentials: true,
   });
-
-  console.log(response);
 
   return response;
 }
