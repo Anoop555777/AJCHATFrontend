@@ -12,14 +12,4 @@ export default defineConfig({
       "framer-motion",
     ],
   },
-  server: {
-    proxy: {
-      // When frontend requests /api -> send it to Node.js backend
-      "/api": {
-        target: "https://ajchat-pmbk.onrender.com", // your Node.js backend
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
 });
