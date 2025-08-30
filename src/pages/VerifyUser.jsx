@@ -30,7 +30,7 @@ const VerifyUser = () => {
             ✅ Email verified successfully!
           </Text>
           <Text mt={2}>Redirecting you to login...</Text>
-          {setTimeout(() => navigate("/login"), 2000)}
+          {setTimeout(() => navigate("/chat", { replace: true }), 2000)}
         </>
       )}
 
